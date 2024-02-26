@@ -50,10 +50,10 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'fio' => 'Fio',
-            'password' => 'Password',
-            'date_of_birth' => 'Date Of Birth',
-            'tel' => 'Tel',
+            'fio' => 'ФИО',
+            'password' => 'Пароль',
+            'date_of_birth' => 'Дата рождения',
+            'tel' => 'Телефон',
             'role_id' => 'Role ID',
         ];
     }
