@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\User;
+use app\models\Role;
 use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -41,8 +42,11 @@ class UserController extends Controller
         $model = new User();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['../site/index', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $model->role_id = Role::USER_ROLE;
+                if($model->save()) {
+                    return $this->redirect(['../site/index', 'id' => $model->id]);
+                }     
             }
         } else {
             $model->loadDefaultValues();
