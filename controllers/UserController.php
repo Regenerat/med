@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\User;
+use app\models\UserRegister;
 use app\models\Role;
 use app\models\UserSearch;
 use yii\web\Controller;
@@ -39,7 +40,7 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
-        $model = new User();
+        $model = new UserRegister();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {

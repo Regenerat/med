@@ -39,6 +39,7 @@ class User extends \yii\db\ActiveRecord
             [['fio'], 'string', 'max' => 511],
             [['password', 'tel'], 'string', 'max' => 255],
             [['tel'], 'unique'],
+            [['tel'], 'match', 'pattern' => '/^\d{11}$/', 'message' => 'Неверный формат номера телефона'],
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::class, 'targetAttribute' => ['role_id' => 'id']],
         ];
     }
@@ -55,6 +56,7 @@ class User extends \yii\db\ActiveRecord
             'date_of_birth' => 'Дата рождения',
             'tel' => 'Телефон',
             'role_id' => 'Role ID',
+            'password_confirmation' => 'Подтвердите пароль',
         ];
     }
 

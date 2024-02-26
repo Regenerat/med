@@ -16,6 +16,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'password_confirmation')->passwordInput(['maxlength' => true]) ?>
+
     <div class="form-group row">
         <div class="col-lg-4">
             <?= $form->field($model, 'date_of_birth')->textInput(['type' => 'date']) ?>
