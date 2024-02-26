@@ -2,103 +2,79 @@
 
 namespace app\models;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+use Yii;
+
+/**
+ * This is the model class for table "user".
+ *
+ * @property int $id
+ * @property string $fio
+ * @property string $password
+ * @property string $date_of_birth
+ * @property string $tel
+ * @property int $role_id
+ *
+ * @property Reception[] $receptions
+ * @property Role $role
+ */
+class User extends \yii\db\ActiveRecord
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
-
-
     /**
      * {@inheritdoc}
      */
-    public static function findIdentity($id)
+    public static function tableName()
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return 'user';
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function findIdentityByAccessToken($token, $type = null)
+    public function rules()
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return [
+            [['fio', 'password', 'date_of_birth', 'tel', 'role_id'], 'required'],
+            [['date_of_birth'], 'safe'],
+            [['role_id'], 'integer'],
+            [['fio'], 'string', 'max' => 511],
+            [['password', 'tel'], 'string', 'max' => 255],
+            [['tel'], 'unique'],
+            [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::class, 'targetAttribute' => ['role_id' => 'id']],
+        ];
     }
 
     /**
-     * Finds user by username
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'fio' => 'Fio',
+            'password' => 'Password',
+            'date_of_birth' => 'Date Of Birth',
+            'tel' => 'Tel',
+            'role_id' => 'Role ID',
+        ];
+    }
+
+    /**
+     * Gets query for [[Receptions]].
      *
-     * @param string $username
-     * @return static|null
+     * @return \yii\db\ActiveQuery
      */
-    public static function findByUsername($username)
+    public function getReceptions()
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return $this->hasMany(Reception::class, ['user_id' => 'id']);
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAuthKey()
-    {
-        return $this->authKey;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->authKey === $authKey;
-    }
-
-    /**
-     * Validates password
+     * Gets query for [[Role]].
      *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
+     * @return \yii\db\ActiveQuery
      */
-    public function validatePassword($password)
+    public function getRole()
     {
-        return $this->password === $password;
+        return $this->hasOne(Role::class, ['id' => 'role_id']);
     }
 }
