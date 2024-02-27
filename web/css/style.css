@@ -1,3 +1,17 @@
 body {
-    background: #00ffe1;
+    background: rgb(255, 255, 255);
+}
+
+.br-block-green {
+    background-color: #ecf5f1;
+    border: solid;
+    border-color: #e9f1ee;
+    border-radius: 40px;
+}
+
+.br-block-grey {
+    background-color: #F9F9F7;
+    border: solid;
+    border-color: #f0f0ed;
+    border-radius: 40px;
 }
