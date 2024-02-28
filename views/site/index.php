@@ -17,7 +17,7 @@ $this->title = 'My Yii Application';
                     <img src="web\img\1.png" class="img-fluid rounded">             
                 </div>
                 <div class="col-sm-9">
-                    <p class="lead d-flex justify-content-left fw-semibold">От первого лица</p>
+                    <p class="fs-2 d-flex justify-content-left fw-semibold">От первого лица</p>
                     <p class=" d-flex justify-content-left">Холдинг «Мед-Плюс» - одна из крупнейших сетей многопрофильных медицинских центров для взрослых и детей. Холдинг входит в топ частных клиник по оценкам Forbes, РБК, Vademecum и BusinesStat.</p>
                     <p class=" d-flex justify-content-left">Мы ведём свою историю с 2002 года. Сейчас у нас работают 29 многопрофильных клиник в Москве, Подмосковье, Санкт-Петербурге, Иванове и Рязани, которые открыты для вас ежедневно, включая выходные и праздничные дни.</p>
                     <p class="lead d-flex justify-content-end fw-semibold">Николай Вениаминович Смыслов</p>
@@ -31,7 +31,7 @@ $this->title = 'My Yii Application';
         <div class="container">
             <div class="row">
                 <div class="col-sm-7 br-block-grey mt-5 px-4 py-4">
-                    <p class="lead d-flex justify-content-left fw-semibold">Команда «Мед-Плюс»</p>
+                    <p class="fs-2 d-flex justify-content-left fw-semibold">Команда «Мед-Плюс»</p>
                     <p class=" d-flex justify-content-left">В наших центрах работают опытные специалисты, которые с вниманием относятся к каждому пациенту. Это профессионалы, которые станут вашими партнёрами в сохранении здоровья.</p>
                     <p class=" d-flex justify-content-left">Наша команда – более 3000 врачей различных специальностей. Среди них 197 кандидатов медицинских наук, 29 докторов медицинских наук, 8 профессоров, 2 академика РАМН, 7 доцентов и старших научных сотрудников, Заслуженный врач России.</p>
                     <p class=" d-flex justify-content-left">В наших медицинских центрах работают врачи как самых востребованных медицинских специальностей: терапевты, кардиологи, урологи, гинекологи, офтальмологи, оториноларингологи, хирурги и другие, так и редких: генетики, репродуктологи, эмбриологи, гепатологи и другие.</p>
@@ -54,5 +54,46 @@ $this->title = 'My Yii Application';
             </div> 
         </div>            
     </div>
+    
+    <div class="jumbotron text-left bg-transparent mt-5 mb-0">
+        <h1 class="display-4">«Мед-Плюс» в цифрах</h1>
+    </div>
 
+    <div class="container">
+        <div class="row">  
+            <div class="col-sm-3 br-block-green mt-5 px-4 py-2 g-0 g-sm-5">
+                <div class="row">
+                    <div class="col-3 my-auto">
+                        <img src="web\img\plus1.png" class="img-fluid rounded">
+                    </div>
+                    <div class="col-9 my-auto">
+                        <p class="fs-2 d-flex justify-content-left fw-semibold mb-0">45</p>
+                        <p class=" d-flex justify-content-left">Направлений медицины</p>
+                    </div>
+                </div>
+            </div>    
+            <div class="col-sm-4 br-block-green mt-5 px-4 py-2 ms-auto g-0 g-sm-5">
+                <div class="row">
+                    <div class="col-3 my-auto">
+                        <img src="web\img\plus2.svg" class="img-fluid rounded">
+                    </div>
+                    <div class="col-9 my-auto">
+                        <p class="fs-2 d-flex justify-content-left fw-semibold mb-0">5</p>
+                        <p class=" d-flex justify-content-left">регионов (Москва, МО, Рязань, Иваново, Санкт-Петербург)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 br-block-green mt-5 px-4 py-2 ms-auto me-4 g-0 g-sm-5">
+                <div class="row">
+                    <div class="col-3 my-auto">
+                        <img src="web\img\plus3.svg" class="img-fluid rounded">
+                    </div>
+                    <div class="col-9 my-auto">
+                        <p class="fs-2 d-flex justify-content-left fw-semibold mb-0">29</p>
+                        <p class=" d-flex justify-content-left">клиник для взрослых и детей</p>
+                    </div>
+                </div>
+            </div>      
+        </div>  
+    </div>          
 </div>
