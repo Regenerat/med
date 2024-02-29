@@ -38,7 +38,7 @@ class ReceptionSearch extends Reception
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $id = null)
     {
         $query = Reception::find();
 
@@ -59,8 +59,7 @@ class ReceptionSearch extends Reception
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'date_of_reception' => $this->date_of_reception,
-            'user_id' => $this->user_id,
+            'user_id' => ($id ?? $this->user_id),
             'status_id' => $this->status_id,
         ]);
 

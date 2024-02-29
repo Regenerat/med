@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Reception;
 use app\models\ReceptionSearch;
 use app\models\Status;
+use app\models\User;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -34,14 +35,30 @@ class ReceptionController extends Controller
     }
 
     /**
+     * @return User
+     */
+    public function getUser() {
+        return Yii::$app->user->identity;
+    }
+
+    /**
      * Lists all Reception models.
      *
      * @return string
      */
     public function actionIndex()
     {
+        $user = self::getUser();
+        if (!$user) {
+            return $this->goHome();
+        }
+        $userIds = null;
+        if (!$user->isAdmin()) {
+            $userIds = $user->id;
+        }
+
         $searchModel = new ReceptionSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider = $searchModel->search($this->request->queryParams, $userIds);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -84,6 +101,26 @@ class ReceptionController extends Controller
         }
 
         return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing Report model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param int $id ID
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect('index');
+        }
+
+        return $this->render('update', [
             'model' => $model,
         ]);
     }

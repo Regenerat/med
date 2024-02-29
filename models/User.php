@@ -144,4 +144,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->password === $password;
     }
+
+    public function isAdmin() {
+        return $this->role_id == Role::ADMIN_ROLE;
+    }
 }

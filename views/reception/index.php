@@ -18,7 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Reception', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php
+            if(Yii::$app->user->identity->role_id == '1') {
+                echo Html::a('Создать', ['create'], ['class' => 'btn btn-success']) ;
+            }
+        ?>
     </p>
 
     <?= GridView::widget([
@@ -30,6 +34,31 @@ $this->params['breadcrumbs'][] = $this->title;
             'date_of_reception',
             'description:ntext',
             'status',
+            [
+                'attribute'=> 'status',
+                //смена статуса вмдна только админу
+                'visible' => (Yii::$app->user->identity->role_id == '2')?true:false,
+                'format'=> 'raw',
+                'value'=> function ($data) {
+                    $html = Html::beginForm(Url::to(['update', 'id' => $data->id]));
+                    $html .= Html::activeDropDownList($data, 'status_id', [
+                        1 => 'Подтверждено',
+                        2 => 'Отклонено',
+                    ],
+                    [
+                        'prompt' => [
+                            'text'=> 'new',
+                            'options' => [
+                                'value'=> '3',
+                                'style'=> 'display: none',
+                            ]
+                        ]
+                    ]);
+                    $html .= Html::submitButton('Принять', ['class' => 'btn btn-link']);
+                    $html .= Html::endForm();
+                    return $html;
+                }
+            ],
         ],
     ]); ?>
 
