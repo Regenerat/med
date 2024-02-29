@@ -21,26 +21,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Reception', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'patient_fio',
             'date_of_reception',
             'description:ntext',
-            'user_id',
-            //'status_id',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Reception $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
+            'status',
         ],
     ]); ?>
 
