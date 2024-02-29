@@ -32,18 +32,19 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <header id="header">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'Мёд+',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
     ]);
     $items = [
-        ['label' => 'Home', 'url' => ['/site/index']]
+        ['label' => 'Home', 'url' => ['//']]
     ];
     if(Yii::$app->user->isGuest) {
         $items[] = ['label'=> 'Login','url'=> ['/site/login']];
         $items[] = ['label'=> 'Register','url'=> ['/user/index']];
     }
     else {
+        $items[] = ['label'=> 'Receptions','url'=> ['/reception/index']];
         $items[] = '<li class="nav-item">'
             . Html::beginForm(['/site/logout'])
             . Html::submitButton(
